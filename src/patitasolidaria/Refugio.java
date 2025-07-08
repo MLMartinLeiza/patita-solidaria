@@ -34,7 +34,6 @@ public class Refugio {
                 return a;
             }
         }
-        System.out.println("No hay coincidencia");
         return null;
     }
 

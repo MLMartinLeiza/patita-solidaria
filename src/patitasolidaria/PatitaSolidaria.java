@@ -36,6 +36,7 @@ public class PatitaSolidaria {
                     LocalDate fecha = LocalDate.now();
                     Donacion donacion = new Donacion(monto, fecha);
                     refugio.agregarDonacion(donacion);
+                    System.out.println("Gracias por tu aporte!");
                     break;
 
                 case 2:
@@ -74,7 +75,6 @@ public class PatitaSolidaria {
                         a.agregarGasto(g);
 
                         System.out.println("Gasto agregado correctamente");
-                        return;
                     } else {
                         System.out.println("No se encontró animal con ese ID");
                     }
