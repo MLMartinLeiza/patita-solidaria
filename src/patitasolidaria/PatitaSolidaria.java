@@ -2,6 +2,7 @@ package patitasolidaria;
 
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 
 public class PatitaSolidaria {
 
@@ -62,12 +63,24 @@ public class PatitaSolidaria {
                         String motivo = sc.nextLine();
 
                         System.out.println("Ingrese el monto del gasto");
-                        monto = sc.nextDouble();
-                        sc.nextLine();
+                        monto = 0;
+                        boolean entradaValida = false;
 
-                        if (monto <= 0) {
-                            System.out.println("El gasto debe ser mayor que cero");
-                            break;
+                        while (!entradaValida) {
+                            try {
+                                monto = sc.nextDouble();
+                                sc.nextLine();
+
+                                if (monto <= 0) {
+                                    System.out.println("El gasto debe ser mayor que cero");
+                                    break;
+                                } else {
+                                    entradaValida = true;
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("Error: ingresar solo números!");
+                                sc.nextLine();
+                            }
                         }
 
                         fecha = LocalDate.now();
