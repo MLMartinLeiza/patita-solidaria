@@ -23,16 +23,26 @@ public class PatitaSolidaria {
             opcion = sc.nextInt();
             sc.nextLine();
 
+            double monto = 0;
+
             switch (opcion) {
                 case 1:
+                    boolean entradaValida = false;
                     System.out.println("Ingrese el monto a donar");
-                    double monto = sc.nextDouble();
 
-                    if (monto <= 0) {
-                        System.out.println("El monto debe ser mayor a 0.");
-                        break;
+                    while (!entradaValida) {
+                        try {
+                            monto = sc.nextDouble();
+                            if (monto <= 0) {
+                                System.out.println("El monto debe ser mayor que cero.");
+                            } else {
+                                entradaValida = true;
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Error: ingresar solo números!");
+                            sc.nextLine();
+                        }
                     }
-
                     sc.nextLine();
                     LocalDate fecha = LocalDate.now();
                     Donacion donacion = new Donacion(monto, fecha);
@@ -64,7 +74,7 @@ public class PatitaSolidaria {
 
                         System.out.println("Ingrese el monto del gasto");
                         monto = 0;
-                        boolean entradaValida = false;
+                        entradaValida = false;
 
                         while (!entradaValida) {
                             try {
@@ -73,7 +83,6 @@ public class PatitaSolidaria {
 
                                 if (monto <= 0) {
                                     System.out.println("El gasto debe ser mayor que cero");
-                                    break;
                                 } else {
                                     entradaValida = true;
                                 }
@@ -103,6 +112,9 @@ public class PatitaSolidaria {
 
                 case 6:
                     System.out.println("Saliendo, gracias por tu colaboración");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, intente nuevamente.");
                     break;
             }
 
