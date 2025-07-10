@@ -51,13 +51,24 @@ public class PatitaSolidaria {
                     break;
 
                 case 2:
-                    System.out.println("Ingrese el nombre del animal");
-                    String nombre = sc.nextLine();
 
-                    System.out.println("Ingrese la especie");
-                    String especie = sc.nextLine();
+                    String nombre;
+                    String especie;
 
-                    String id = refugio.generarNuevoIdAnimal();
+                    do {
+                        System.out.println("Ingrese el nombre del animal");
+                        nombre = sc.nextLine();
+
+                        System.out.println("Ingrese la especie");
+                        especie = sc.nextLine();
+
+                        if (nombre.trim().isEmpty() || especie.trim().isEmpty()) {
+                            System.out.println("Nombre y especie no pueden estar vacíos!");
+                        }
+                    } while (nombre.trim().isEmpty() || especie.trim().isEmpty());
+                    String id;
+
+                    id = refugio.generarNuevoIdAnimal();
                     Animal animal = new Animal(nombre, especie, id);
                     refugio.agregarAnimal(animal);
                     break;
