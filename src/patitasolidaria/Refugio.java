@@ -77,4 +77,11 @@ public class Refugio {
         }
     }
 
+    public void listarAnimales() {
+        System.out.println("Animales registrados:");
+        for (Animal a : animales) {
+            System.out.println(a);
+        }
+    }
+
 }

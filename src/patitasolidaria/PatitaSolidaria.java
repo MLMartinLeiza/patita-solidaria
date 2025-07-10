@@ -18,7 +18,8 @@ public class PatitaSolidaria {
                     + "\n 3. Agregar gasto a animal existente"
                     + "\n 4. Ver resumen general"
                     + "\n 5. Ver movimientos"
-                    + "\n 6. Salir");
+                    + "\n 6. Listar animales registrados"
+                    + "\n 7. Salir");
 
             opcion = sc.nextInt();
             sc.nextLine();
@@ -122,14 +123,18 @@ public class PatitaSolidaria {
                     break;
 
                 case 6:
-                    System.out.println("Saliendo, gracias por tu colaboración");
+                    refugio.listarAnimales();
+                    break;
+
+                case 7:
+                    System.out.println("Saliendo, gracias por tu colaboración!");
                     break;
                 default:
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
                     break;
             }
 
-        } while (opcion != 0);
+        } while (opcion != 7);
     }
 
 }
