@@ -1,5 +1,6 @@
 package patitasolidaria;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Refugio {
@@ -82,6 +83,31 @@ public class Refugio {
         for (Animal a : animales) {
             System.out.println(a);
         }
+    }
+
+    public void filtrarGastosPorFechas(String id, LocalDate fechaInicial, LocalDate fechaFinal) {
+        boolean gastoEncontrado = false;
+        boolean animalEncontrado = false;
+        for (Animal a : animales) {
+            if (a.getId().equalsIgnoreCase(id)) {
+                animalEncontrado = true;
+                for (Gasto g : a.getGastos()) {
+                    if ((g.getFecha().isAfter(fechaInicial) || g.getFecha().isEqual(fechaInicial)) && (g.getFecha().isBefore(fechaFinal) || g.getFecha().isEqual(fechaFinal))) {
+                        System.out.println(g);
+                        gastoEncontrado = true;
+                    }
+
+                }
+                if (!gastoEncontrado) {
+                    System.out.println("No se encontraron gastos en ese lapso de fechas. ");
+                }
+            }
+
+        }
+        if (!animalEncontrado) {
+            System.out.println("No se encontró animal con ese ID");
+        }
+
     }
 
 }

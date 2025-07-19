@@ -3,6 +3,7 @@ package patitasolidaria;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.time.format.DateTimeParseException;
 
 public class PatitaSolidaria {
 
@@ -19,7 +20,8 @@ public class PatitaSolidaria {
                     + "\n 4. Ver resumen general"
                     + "\n 5. Ver movimientos"
                     + "\n 6. Listar animales registrados"
-                    + "\n 7. Salir");
+                    + "\n 7. Filtrar gasto de animal por fecha"
+                    + "\n 8. Salir");
 
             opcion = sc.nextInt();
             sc.nextLine();
@@ -127,6 +129,37 @@ public class PatitaSolidaria {
                     break;
 
                 case 7:
+                    System.out.println("Ingrese ID del animal:");
+                    id = sc.nextLine();
+
+                    LocalDate fechaInicio = null;
+                    LocalDate fechaFin = null;
+                    boolean fechasValidas = false;
+
+                    while (!fechasValidas) {
+                        try {
+                            System.out.println("Ingrese fecha inicial (yyyy-mm-dd):");
+                            String fechaInicial = sc.nextLine();
+                            System.out.println("Ingrese fecha final (yyyy-mm-dd):");
+                            String fechaFinal = sc.nextLine();
+                            fechaInicio = LocalDate.parse(fechaInicial);
+                            fechaFin = LocalDate.parse(fechaFinal);
+                            if (fechaInicio.isAfter(fechaFin)) {
+                                System.out.println("La fecha inicial no puede ser posterior a la fecha final!");
+                                continue;
+                            } else {
+                                fechasValidas = true;
+                            }
+
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Formato de fecha inválido. Por favor, use el formato yyyy-mm-dd");
+                        }
+                    }
+
+                    refugio.filtrarGastosPorFechas(id, fechaInicio, fechaFin);
+                    break;
+
+                case 8:
                     System.out.println("Saliendo, gracias por tu colaboración!");
                     break;
                 default:
@@ -134,7 +167,7 @@ public class PatitaSolidaria {
                     break;
             }
 
-        } while (opcion != 7);
+        } while (opcion != 8);
     }
 
 }
