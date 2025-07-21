@@ -7,6 +7,28 @@ import java.time.format.DateTimeParseException;
 
 public class PatitaSolidaria {
 
+    private static double pedirMontoPositivo(Scanner sc) {
+        boolean entradaValida = false;
+        double monto = 0;
+        System.out.println("Ingrese el monto:");
+
+        while (!entradaValida) {
+            try {
+                monto = sc.nextDouble();
+                if (monto <= 0) {
+                    System.out.println("El monto debe ser mayor que cero.");
+                } else {
+                    entradaValida = true;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: ingresar solo números!");
+            } finally {
+                sc.nextLine();
+            }
+        }
+        return monto;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Refugio refugio = new Refugio();
@@ -30,23 +52,7 @@ public class PatitaSolidaria {
 
             switch (opcion) {
                 case 1:
-                    boolean entradaValida = false;
-                    System.out.println("Ingrese el monto a donar");
-
-                    while (!entradaValida) {
-                        try {
-                            monto = sc.nextDouble();
-                            if (monto <= 0) {
-                                System.out.println("El monto debe ser mayor que cero.");
-                            } else {
-                                entradaValida = true;
-                            }
-                        } catch (InputMismatchException e) {
-                            System.out.println("Error: ingresar solo números!");
-                            sc.nextLine();
-                        }
-                    }
-                    sc.nextLine();
+                    monto = pedirMontoPositivo(sc);
                     LocalDate fecha = LocalDate.now();
                     Donacion donacion = new Donacion(monto, fecha);
                     refugio.agregarDonacion(donacion);
@@ -86,25 +92,7 @@ public class PatitaSolidaria {
                         System.out.println("Ingrese motivo del gasto");
                         String motivo = sc.nextLine();
 
-                        System.out.println("Ingrese el monto del gasto");
-                        monto = 0;
-                        entradaValida = false;
-
-                        while (!entradaValida) {
-                            try {
-                                monto = sc.nextDouble();
-                                sc.nextLine();
-
-                                if (monto <= 0) {
-                                    System.out.println("El gasto debe ser mayor que cero");
-                                } else {
-                                    entradaValida = true;
-                                }
-                            } catch (InputMismatchException e) {
-                                System.out.println("Error: ingresar solo números!");
-                                sc.nextLine();
-                            }
-                        }
+                        monto = pedirMontoPositivo(sc);
 
                         fecha = LocalDate.now();
                         Gasto g = new Gasto(motivo, monto, fecha);
