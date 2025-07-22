@@ -27,10 +27,6 @@ public class Animal {
         return id;
     }
 
-    public void agregarGasto(Gasto g) {
-        gastos.add(g);
-    }
-
     public double totalGastado() {
         double gastoTotal = 0;
         for (Gasto g : gastos) {

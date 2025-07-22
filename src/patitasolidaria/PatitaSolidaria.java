@@ -16,7 +16,7 @@ public class PatitaSolidaria {
             try {
                 monto = sc.nextDouble();
                 if (monto <= 0) {
-                    System.out.println("El monto debe ser mayor que cero.");
+                    System.out.println("El monto debe ser mayor que cero!");
                 } else {
                     entradaValida = true;
                 }
@@ -86,22 +86,12 @@ public class PatitaSolidaria {
                     System.out.println("Ingrese ID del animal");
                     idAnimal = sc.nextLine();
 
-                    Animal a = refugio.buscarAnimalPorId(idAnimal);
+                    System.out.println("Ingrese motivo del gasto");
+                    String motivo = sc.nextLine();
 
-                    if (a != null) {
-                        System.out.println("Ingrese motivo del gasto");
-                        String motivo = sc.nextLine();
+                    monto = pedirMontoPositivo(sc);
 
-                        monto = pedirMontoPositivo(sc);
-
-                        LocalDate fechaGasto = LocalDate.now();
-                        Gasto g = new Gasto(motivo, monto, fechaGasto);
-                        a.agregarGasto(g);
-
-                        System.out.println("Gasto agregado correctamente");
-                    } else {
-                        System.out.println("No se encontró animal con ese ID");
-                    }
+                    refugio.agregarGastoAAnimal(idAnimal, motivo, monto);
                     break;
 
                 case 4:
@@ -151,7 +141,7 @@ public class PatitaSolidaria {
                     System.out.println("Saliendo, gracias por tu colaboración!");
                     break;
                 default:
-                    System.out.println("Opción no válida. Por favor, intente nuevamente.");
+                    System.out.println("Opción no válida. Por favor, intente nuevamente!");
                     break;
             }
 

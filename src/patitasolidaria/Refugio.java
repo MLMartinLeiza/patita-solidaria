@@ -2,13 +2,20 @@ package patitasolidaria;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
 
 public class Refugio {
 
     protected ArrayList<Animal> animales = new ArrayList<>();
     protected ArrayList<Donacion> donaciones = new ArrayList<>();
+    protected ArrayList<Movimiento> movimientos = new ArrayList();
 
     private int contadorAnimales = 1;
+
+    public ArrayList<Movimiento> getMovimientos() {
+        return movimientos;
+    }
 
     public String generarNuevoIdAnimal() {
         String id = "A" + String.format("%03d", contadorAnimales);
@@ -18,6 +25,19 @@ public class Refugio {
 
     public void agregarDonacion(Donacion d) {
         donaciones.add(d);
+        movimientos.add(d);
+    }
+
+    public void agregarGastoAAnimal(String idAnimal, String motivo, double monto) {
+        Animal animal = buscarAnimalPorId(idAnimal);
+        if (animal != null) {
+            Gasto gasto = new Gasto(motivo, monto, LocalDate.now());
+            animal.getGastos().add(gasto);
+            movimientos.add(gasto);
+            System.out.println("Gasto agregado correctamente!");
+        } else {
+            System.out.println("No se encontró animal con ese ID!");
+        }
     }
 
     public void agregarAnimal(Animal a) {
@@ -65,16 +85,15 @@ public class Refugio {
     }
 
     public void listarMovimientos() {
-        System.out.println("Donaciones Recibidas: ");
-        for (Donacion d : donaciones) {
-            System.out.println(d);
-        }
-        System.out.println("Gastos de cada Animal: ");
-        for (Animal a : animales) {
-            System.out.println(a);
-            for (Gasto g : a.getGastos()) {
-                System.out.println("  - " + g);
+        Collections.sort(movimientos, new Comparator<Movimiento>() {
+            @Override
+            public int compare(Movimiento m1, Movimiento m2) {
+                return m1.getFecha().compareTo(m2.getFecha());
             }
+        });
+
+        for (Movimiento m : movimientos) {
+            System.out.println(m);
         }
     }
 
