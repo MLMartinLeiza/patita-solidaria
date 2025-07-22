@@ -53,8 +53,8 @@ public class PatitaSolidaria {
             switch (opcion) {
                 case 1:
                     monto = pedirMontoPositivo(sc);
-                    LocalDate fecha = LocalDate.now();
-                    Donacion donacion = new Donacion(monto, fecha);
+                    LocalDate fechaDonacion = LocalDate.now();
+                    Donacion donacion = new Donacion(monto, fechaDonacion);
                     refugio.agregarDonacion(donacion);
                     System.out.println("Gracias por tu aporte!");
                     break;
@@ -75,18 +75,18 @@ public class PatitaSolidaria {
                             System.out.println("Nombre y especie no pueden estar vacíos!");
                         }
                     } while (nombre.trim().isEmpty() || especie.trim().isEmpty());
-                    String id;
+                    String idAnimal;
 
-                    id = refugio.generarNuevoIdAnimal();
-                    Animal animal = new Animal(nombre, especie, id);
+                    idAnimal = refugio.generarNuevoIdAnimal();
+                    Animal animal = new Animal(nombre, especie, idAnimal);
                     refugio.agregarAnimal(animal);
                     break;
 
                 case 3:
                     System.out.println("Ingrese ID del animal");
-                    id = sc.nextLine();
+                    idAnimal = sc.nextLine();
 
-                    Animal a = refugio.buscarAnimalPorId(id);
+                    Animal a = refugio.buscarAnimalPorId(idAnimal);
 
                     if (a != null) {
                         System.out.println("Ingrese motivo del gasto");
@@ -94,8 +94,8 @@ public class PatitaSolidaria {
 
                         monto = pedirMontoPositivo(sc);
 
-                        fecha = LocalDate.now();
-                        Gasto g = new Gasto(motivo, monto, fecha);
+                        LocalDate fechaGasto = LocalDate.now();
+                        Gasto g = new Gasto(motivo, monto, fechaGasto);
                         a.agregarGasto(g);
 
                         System.out.println("Gasto agregado correctamente");
@@ -118,7 +118,7 @@ public class PatitaSolidaria {
 
                 case 7:
                     System.out.println("Ingrese ID del animal:");
-                    id = sc.nextLine();
+                    idAnimal = sc.nextLine();
 
                     LocalDate fechaInicio = null;
                     LocalDate fechaFin = null;
@@ -144,7 +144,7 @@ public class PatitaSolidaria {
                         }
                     }
 
-                    refugio.filtrarGastosPorFechas(id, fechaInicio, fechaFin);
+                    refugio.filtrarGastosPorFechas(idAnimal, fechaInicio, fechaFin);
                     break;
 
                 case 8:
