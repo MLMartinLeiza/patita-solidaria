@@ -43,7 +43,8 @@ public class PatitaSolidaria {
                     + "\n 5. Ver movimientos"
                     + "\n 6. Listar animales registrados"
                     + "\n 7. Filtrar gasto de animal por fecha"
-                    + "\n 8. Salir");
+                    + "\n 8. Filtrar donación por fecha"
+                    + "\n 9. Salir");
 
             opcion = sc.nextInt();
             sc.nextLine();
@@ -110,23 +111,23 @@ public class PatitaSolidaria {
                     System.out.println("Ingrese ID del animal:");
                     idAnimal = sc.nextLine();
 
-                    LocalDate fechaInicio = null;
-                    LocalDate fechaFin = null;
-                    boolean fechasValidas = false;
+                    LocalDate fechaInicioGasto = null;
+                    LocalDate fechaFinGasto = null;
+                    boolean fechasValidasGasto = false;
 
-                    while (!fechasValidas) {
+                    while (!fechasValidasGasto) {
                         try {
                             System.out.println("Ingrese fecha inicial (yyyy-mm-dd):");
-                            String fechaInicial = sc.nextLine();
+                            String fechaInicialGasto = sc.nextLine();
                             System.out.println("Ingrese fecha final (yyyy-mm-dd):");
-                            String fechaFinal = sc.nextLine();
-                            fechaInicio = LocalDate.parse(fechaInicial);
-                            fechaFin = LocalDate.parse(fechaFinal);
-                            if (fechaInicio.isAfter(fechaFin)) {
+                            String fechaFinalGasto = sc.nextLine();
+                            fechaInicioGasto = LocalDate.parse(fechaInicialGasto);
+                            fechaFinGasto = LocalDate.parse(fechaFinalGasto);
+                            if (fechaInicioGasto.isAfter(fechaFinGasto)) {
                                 System.out.println("La fecha inicial no puede ser posterior a la fecha final!");
                                 continue;
                             } else {
-                                fechasValidas = true;
+                                fechasValidasGasto = true;
                             }
 
                         } catch (DateTimeParseException e) {
@@ -134,10 +135,38 @@ public class PatitaSolidaria {
                         }
                     }
 
-                    refugio.filtrarGastosPorFechas(idAnimal, fechaInicio, fechaFin);
+                    refugio.filtrarGastosPorFechas(idAnimal, fechaInicioGasto, fechaFinGasto);
                     break;
 
                 case 8:
+                    LocalDate fechaInicioDonacion = null;
+                    LocalDate fechaFinDonacion = null;
+                    boolean fechasValidasDonacion = false;
+
+                    while (!fechasValidasDonacion) {
+                        try {
+                            System.out.println("Ingrese fecha inicial (yyyy-mm-dd):");
+                            String fechaInicialDonacion = sc.nextLine();
+                            System.out.println("Ingrese fecha final (yyyy-mm-dd):");
+                            String fechaFinalDonacion = sc.nextLine();
+                            fechaInicioDonacion = LocalDate.parse(fechaInicialDonacion);
+                            fechaFinDonacion = LocalDate.parse(fechaFinalDonacion);
+                            if (fechaInicioDonacion.isAfter(fechaFinDonacion)) {
+                                System.out.println("La fecha inicial no puede ser posterior a la fecha final!");
+                                continue;
+                            } else {
+                                fechasValidasDonacion = true;
+                            }
+
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Formato de fecha inválido. Por favor, use el formato yyyy-mm-dd");
+                        }
+                    }
+
+                    refugio.filtrarDonacionPorFecha(fechaInicioDonacion, fechaFinDonacion);
+                    break;
+
+                case 9:
                     System.out.println("Saliendo, gracias por tu colaboración!");
                     break;
                 default:
@@ -145,7 +174,7 @@ public class PatitaSolidaria {
                     break;
             }
 
-        } while (opcion != 8);
+        } while (opcion != 9);
     }
 
 }

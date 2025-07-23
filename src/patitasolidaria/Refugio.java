@@ -129,4 +129,17 @@ public class Refugio {
 
     }
 
+    public void filtrarDonacionPorFecha(LocalDate inicio, LocalDate fin) {
+        boolean donacionEncontrada = false;
+        for (Donacion d : donaciones) {
+            if ((d.getFecha().isEqual(inicio) || d.getFecha().isAfter(inicio)) && (d.getFecha().isEqual(fin) || d.getFecha().isBefore(fin))) {
+                System.out.println(d);
+                donacionEncontrada = true;
+            }
+        }
+        if (!donacionEncontrada) {
+            System.out.println("No se encontró donación en ese lapso de fechas!");
+        }
+    }
+
 }
