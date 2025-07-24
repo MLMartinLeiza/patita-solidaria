@@ -87,12 +87,17 @@ public class PatitaSolidaria {
                     System.out.println("Ingrese ID del animal");
                     idAnimal = sc.nextLine();
 
-                    System.out.println("Ingrese motivo del gasto");
-                    String motivo = sc.nextLine();
+                    if (refugio.buscarAnimalPorId(idAnimal) != null) {
+                        System.out.println("Ingrese motivo del gasto");
+                        String motivo = sc.nextLine();
 
-                    monto = pedirMontoPositivo(sc);
+                        monto = pedirMontoPositivo(sc);
 
-                    refugio.agregarGastoAAnimal(idAnimal, motivo, monto);
+                        refugio.agregarGastoAAnimal(idAnimal, motivo, monto);
+                        continue;
+                    } else {
+                        System.out.println("No se encontró animal con ese ID!");
+                    }
                     break;
 
                 case 4:
