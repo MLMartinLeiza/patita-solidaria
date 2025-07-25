@@ -110,6 +110,7 @@ public class Refugio {
         for (Animal a : animales) {
             if (a.getId().equalsIgnoreCase(id)) {
                 animalEncontrado = true;
+                System.out.println("Gastos del animal: " + " " + a.getNombre() + "- ID: " + a.getId());
                 for (Gasto g : a.getGastos()) {
                     if ((g.getFecha().isAfter(fechaInicial) || g.getFecha().isEqual(fechaInicial)) && (g.getFecha().isBefore(fechaFinal) || g.getFecha().isEqual(fechaFinal))) {
                         System.out.println(g);
@@ -126,7 +127,6 @@ public class Refugio {
         if (!animalEncontrado) {
             System.out.println("No se encontró animal con ese ID");
         }
-
     }
 
     public void filtrarDonacionPorFecha(LocalDate inicio, LocalDate fin) {
