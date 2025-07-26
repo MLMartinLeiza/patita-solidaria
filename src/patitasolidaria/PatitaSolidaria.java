@@ -116,59 +116,14 @@ public class PatitaSolidaria {
                     System.out.println("Ingrese ID del animal:");
                     idAnimal = sc.nextLine();
 
-                    LocalDate fechaInicioGasto = null;
-                    LocalDate fechaFinGasto = null;
-                    boolean fechasValidasGasto = false;
-
-                    while (!fechasValidasGasto) {
-                        try {
-                            System.out.println("Ingrese fecha inicial (yyyy-mm-dd):");
-                            String fechaInicialGasto = sc.nextLine();
-                            System.out.println("Ingrese fecha final (yyyy-mm-dd):");
-                            String fechaFinalGasto = sc.nextLine();
-                            fechaInicioGasto = LocalDate.parse(fechaInicialGasto);
-                            fechaFinGasto = LocalDate.parse(fechaFinalGasto);
-                            if (fechaInicioGasto.isAfter(fechaFinGasto)) {
-                                System.out.println("La fecha inicial no puede ser posterior a la fecha final!");
-                                continue;
-                            } else {
-                                fechasValidasGasto = true;
-                            }
-
-                        } catch (DateTimeParseException e) {
-                            System.out.println("Formato de fecha inválido. Por favor, use el formato yyyy-mm-dd");
-                        }
-                    }
-
-                    refugio.filtrarGastosPorFechas(idAnimal, fechaInicioGasto, fechaFinGasto);
+                    RangoFecha rangoGasto = RangoFecha.pedirRangoValido(sc);
+                    refugio.filtrarGastosPorFechas(idAnimal, rangoGasto.getFechaInicio(), rangoGasto.getFechaFin());
                     break;
 
                 case 8:
-                    LocalDate fechaInicioDonacion = null;
-                    LocalDate fechaFinDonacion = null;
-                    boolean fechasValidasDonacion = false;
+                    RangoFecha rangoDonacion = RangoFecha.pedirRangoValido(sc);
 
-                    while (!fechasValidasDonacion) {
-                        try {
-                            System.out.println("Ingrese fecha inicial (yyyy-mm-dd):");
-                            String fechaInicialDonacion = sc.nextLine();
-                            System.out.println("Ingrese fecha final (yyyy-mm-dd):");
-                            String fechaFinalDonacion = sc.nextLine();
-                            fechaInicioDonacion = LocalDate.parse(fechaInicialDonacion);
-                            fechaFinDonacion = LocalDate.parse(fechaFinalDonacion);
-                            if (fechaInicioDonacion.isAfter(fechaFinDonacion)) {
-                                System.out.println("La fecha inicial no puede ser posterior a la fecha final!");
-                                continue;
-                            } else {
-                                fechasValidasDonacion = true;
-                            }
-
-                        } catch (DateTimeParseException e) {
-                            System.out.println("Formato de fecha inválido. Por favor, use el formato yyyy-mm-dd");
-                        }
-                    }
-
-                    refugio.filtrarDonacionPorFecha(fechaInicioDonacion, fechaFinDonacion);
+                    refugio.filtrarDonacionPorFecha(rangoDonacion.getFechaInicio(), rangoDonacion.getFechaFin());
                     break;
 
                 case 9:
