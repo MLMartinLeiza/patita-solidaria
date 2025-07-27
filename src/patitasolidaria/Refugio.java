@@ -93,8 +93,23 @@ public class Refugio {
         });
 
         for (Movimiento m : movimientos) {
+
+            if (m instanceof Gasto) {
+                encontrado:
+                for (Animal a : animales) {
+                    for (Gasto g : a.getGastos()) {
+                        if (g.equals(m)) {
+                            System.out.println("---- Gasto de: " + a.getNombre() + " (ID: " + a.getId() + ") ----");
+                            break encontrado;
+                        }
+                    }
+                }
+            } else if (m instanceof Donacion) {
+                System.out.println("---- Donación ----");
+            }
             System.out.println(m);
         }
+        mostrarResumen();
     }
 
     public void listarAnimales() {
