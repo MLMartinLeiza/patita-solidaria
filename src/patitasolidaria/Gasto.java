@@ -6,11 +6,13 @@ public class Gasto extends Movimiento {
 
     protected String motivo;
     protected double monto;
+    private String idAnimal;
 
-    public Gasto(String motivo, double monto, LocalDate fecha) {
+    public Gasto(String motivo, double monto, String idAnimal, LocalDate fecha) {
         super(fecha);
         this.motivo = motivo;
         this.monto = monto;
+        this.idAnimal = idAnimal;
     }
 
     public String getMotivo() {
@@ -23,7 +25,7 @@ public class Gasto extends Movimiento {
 
     @Override
     public String toString() {
-        return "Gasto de $" + monto + " en " + motivo + " (" + fecha + ")";
+        return "Gasto de $" + monto + " en " + motivo + " (" + fecha + ")" + " - ID: " + idAnimal;
     }
 
 }

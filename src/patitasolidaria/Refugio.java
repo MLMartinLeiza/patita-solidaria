@@ -31,7 +31,7 @@ public class Refugio {
     public void agregarGastoAAnimal(String idAnimal, String motivo, double monto) {
         Animal animal = buscarAnimalPorId(idAnimal);
         if (animal != null) {
-            Gasto gasto = new Gasto(motivo, monto, LocalDate.now());
+            Gasto gasto = new Gasto(motivo, monto, idAnimal, LocalDate.now());
             animal.getGastos().add(gasto);
             movimientos.add(gasto);
             System.out.println("Gasto agregado correctamente!");
