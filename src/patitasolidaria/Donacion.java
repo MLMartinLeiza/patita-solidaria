@@ -17,7 +17,7 @@ public class Donacion extends Movimiento {
 
     @Override
     public String toString() {
-        return "Donacion de $" + monto + " (" + fecha + ")";
+        return "$"+monto + " (" + fecha + ")";
     }
 
 }

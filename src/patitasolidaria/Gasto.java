@@ -25,7 +25,7 @@ public class Gasto extends Movimiento {
 
     @Override
     public String toString() {
-        return "Gasto de $" + monto + " en " + motivo + " (" + fecha + ")" + " - ID: " + idAnimal;
+        return  "$" + monto + " en " + motivo + " (" + fecha + ")";
     }
 
 }

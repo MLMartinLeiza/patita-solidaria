@@ -99,16 +99,18 @@ public class Refugio {
                 for (Animal a : animales) {
                     for (Gasto g : a.getGastos()) {
                         if (g.equals(m)) {
-                            System.out.println("---- Gasto de: " + a.getNombre() + " (ID: " + a.getId() + ") ----");
+                            System.out.println("------------------------------------");
+                            System.out.println("Gasto: " + a.getNombre() + " (" + a.getId() + ")" + " - " + m);
                             break encontrado;
                         }
                     }
                 }
             } else if (m instanceof Donacion) {
-                System.out.println("---- Donación ----");
+                System.out.println("------------------------------------");
+                System.out.println("Donación: " + m);
             }
-            System.out.println(m);
         }
+        System.out.println("------------------------------------");
         mostrarResumen();
     }
 
