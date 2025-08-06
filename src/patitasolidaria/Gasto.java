@@ -23,6 +23,14 @@ public class Gasto extends Movimiento {
         return monto;
     }
 
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
     @Override
     public String toString() {
         return  "$" + monto + " en " + motivo + " (" + fecha + ")";

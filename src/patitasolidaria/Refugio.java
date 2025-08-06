@@ -159,4 +159,34 @@ public class Refugio {
         }
     }
 
+    public void modificarMotivoGasto(String idAnimal, int indice, String nuevoMotivo) {
+        for (Animal a : animales) {
+            if (a.getId().equalsIgnoreCase(idAnimal)) {
+                if (indice >= 0 && indice < a.getGastos().size()) {
+                    a.getGastos().get(indice).setMotivo(nuevoMotivo);
+                    System.out.println("Motivo actualizado!");
+                } else {
+                    System.out.println("Indice fuera de rango!");
+                }
+                return;
+            }
+        }
+        System.out.println("No se encontró animal con ese ID!");
+    }
+
+    public void modificarMontoGasto(String idAnimal, int indice, double nuevoMonto) {
+        for (Animal a : animales) {
+            if (a.getId().equalsIgnoreCase(idAnimal)) {
+                if (indice >= 0 && indice < a.getGastos().size()) {
+                    a.getGastos().get(indice).setMonto(nuevoMonto);
+                    System.out.println("Monto actualizado!");
+                } else {
+                    System.out.println("Índice fuera de rango!");
+                }
+                return;
+            }
+        }
+        System.out.println("No se encontró animal con ese ID!");
+    }
+
 }

@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class PatitaSolidaria {
 
@@ -29,6 +30,41 @@ public class PatitaSolidaria {
         return monto;
     }
 
+    public static SeleccionGasto seleccionarGastoDeAnimal(Scanner sc, Refugio refugio) {
+        System.out.println("Ingrese el ID del animal");
+        String idAnimal = sc.nextLine();
+
+        Animal a = refugio.buscarAnimalPorId(idAnimal);
+
+        if (a == null) {
+            System.out.println("No se encontró animal con ese ID!");
+            return null;
+        }
+
+        List<Gasto> gastos = a.getGastos();
+
+        if (gastos.isEmpty()) {
+            System.out.println("Este animal no tiene gastos registrados!");
+            return null;
+        }
+
+        System.out.println("------Gastos registrados de " + a.getNombre() + "------");
+
+        for (int i = 0; i < gastos.size(); i++) {
+            System.out.println(i + ": " + gastos.get(i));
+        }
+
+        System.out.println("Ingrese el índice del gasto a modificar: ");
+        int indice = sc.nextInt();
+        sc.nextLine();
+
+        if (indice < 0 || indice >= gastos.size()) {
+            System.out.println("Índice inválido");
+            return null;
+        }
+        return new SeleccionGasto(idAnimal, indice);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Refugio refugio = new Refugio();
@@ -44,7 +80,11 @@ public class PatitaSolidaria {
                     + "\n 6. Listar animales registrados"
                     + "\n 7. Filtrar gasto de animal por fecha"
                     + "\n 8. Filtrar donación por fecha"
-                    + "\n 9. Salir");
+                    + "\n 9. Modificar motivo de un gasto"
+                    + "\n 10. Modificar monto de un gasto"
+                    + "\n 11. Eliminar gasto de un animal"
+                    + "\n 12. Contador de animales ayudados"
+                    + "\n 13. Salir");
 
             opcion = sc.nextInt();
             sc.nextLine();
@@ -127,6 +167,40 @@ public class PatitaSolidaria {
                     break;
 
                 case 9:
+                    SeleccionGasto seleccionGasto = seleccionarGastoDeAnimal(sc, refugio);
+                    if (seleccionGasto == null) {
+                        break;
+                    }
+
+                    System.out.println("Ingrese el nuevo motivo:");
+                    String nuevoMotivo = sc.nextLine();
+
+                    refugio.modificarMotivoGasto(seleccionGasto.getId(), seleccionGasto.getIndice(), nuevoMotivo);
+
+                    break;
+
+                case 10:
+
+                    seleccionGasto = seleccionarGastoDeAnimal(sc, refugio);
+                    if (seleccionGasto == null) {
+                        break;
+                    }
+
+                    double nuevoMonto;
+                    do {
+                        System.out.println("Ingrese el nuevo monto");
+                        nuevoMonto = sc.nextDouble();
+                        sc.nextLine();
+                        if (nuevoMonto <= 0) {
+                            System.out.println("Ingrese un monto válido!");
+                        }
+                    } while (nuevoMonto <= 0);
+
+                    refugio.modificarMontoGasto(seleccionGasto.getId(), seleccionGasto.getIndice(), nuevoMonto);
+
+                    break;
+
+                case 13:
                     System.out.println("Saliendo, gracias por tu colaboración!");
                     break;
                 default:
@@ -134,7 +208,7 @@ public class PatitaSolidaria {
                     break;
             }
 
-        } while (opcion != 9);
+        } while (opcion != 13);
     }
 
 }
