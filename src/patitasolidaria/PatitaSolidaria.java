@@ -208,6 +208,11 @@ public class PatitaSolidaria {
                     refugio.eliminarGastoAnimal(seleccionGasto.getId(), seleccionGasto.getIndice());
                     break;
 
+                case 12:
+                    int totalAyudados = refugio.contarAnimalesAyudados();
+                    System.out.println("Animales ayudados: " + totalAyudados);
+                    break;
+
                 case 13:
                     System.out.println("Saliendo, gracias por tu colaboración!");
                     break;

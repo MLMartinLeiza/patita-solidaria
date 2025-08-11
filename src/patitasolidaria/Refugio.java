@@ -207,4 +207,14 @@ public class Refugio {
         System.out.println("No se encontró animal con ese ID!");
     }
 
+    public int contarAnimalesAyudados() {
+        int contador = 0;
+        for (Animal a : animales) {
+            if (!a.getGastos().isEmpty()) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
 }
