@@ -54,7 +54,7 @@ public class PatitaSolidaria {
             System.out.println(i + ": " + gastos.get(i));
         }
 
-        System.out.println("Ingrese el índice del gasto a modificar: ");
+        System.out.println("Ingrese el índice del gasto: ");
         int indice = sc.nextInt();
         sc.nextLine();
 
@@ -198,6 +198,14 @@ public class PatitaSolidaria {
 
                     refugio.modificarMontoGasto(seleccionGasto.getId(), seleccionGasto.getIndice(), nuevoMonto);
 
+                    break;
+
+                case 11:
+                    seleccionGasto = seleccionarGastoDeAnimal(sc, refugio);
+                    if (seleccionGasto == null) {
+                        break;
+                    }
+                    refugio.eliminarGastoAnimal(seleccionGasto.getId(), seleccionGasto.getIndice());
                     break;
 
                 case 13:

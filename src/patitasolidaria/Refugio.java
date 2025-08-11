@@ -189,4 +189,22 @@ public class Refugio {
         System.out.println("No se encontró animal con ese ID!");
     }
 
+    public void eliminarGastoAnimal(String idAnimal, int indice) {
+        for (Animal a : animales) {
+            if (a.getId().equalsIgnoreCase(idAnimal)) {
+                if (indice >= 0 && indice < a.getGastos().size()) {
+                    Gasto gastoAEliminar = a.getGastos().get(indice);
+                    movimientos.remove(gastoAEliminar);
+                    a.getGastos().remove(gastoAEliminar);
+                    System.out.println("Gasto eliminado!");
+                    return;
+                } else {
+                    System.out.println("Índice fuera de rango!");
+                    return;
+                }
+            }
+        }
+        System.out.println("No se encontró animal con ese ID!");
+    }
+
 }
